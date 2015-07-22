@@ -1,6 +1,6 @@
 # jstransformer-twig
 
-[Twig.js](hhttps://github.com/justjohn/twig.js) support for [JSTransformers](http://github.com/jstransformers).
+[Twig.js](https://github.com/justjohn/twig.js) support for [JSTransformers](http://github.com/jstransformers).
 
 [![Build Status](https://img.shields.io/travis/jstransformers/jstransformer-twig/master.svg)](https://travis-ci.org/jstransformers/jstransformer-twig)
 [![Coverage Status](https://img.shields.io/coveralls/jstransformers/jstransformer-twig/master.svg)](https://coveralls.io/r/jstransformers/jstransformer-twig?branch=master)

@@ -1,6 +1,9 @@
 {
+  "dependencies": {
+    "twig": "^0.8.2"
+  },
   "name": "jstransformer-twig",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Twig.js support for JSTransformers.",
   "keywords": [
     "jstransformer"
@@ -23,8 +26,5 @@
     "name": "JSTransformers Team",
     "url": "http://github.com/orgs/jstransformers/people"
   },
-  "license": "MIT",
-  "dependencies": {
-    "twig": "^0.8.2"
-  }
+  "license": "MIT"
 }

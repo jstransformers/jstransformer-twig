@@ -1,10 +1,10 @@
 {
-  "dependencies": {
-    "twig": "^0.8.2"
-  },
   "name": "jstransformer-twig",
   "version": "0.1.0",
   "description": "Twig.js support for JSTransformers.",
+  "dependencies": {
+    "twig": "^0.8.2"
+  },
   "keywords": [
     "jstransformer"
   ],
@@ -17,6 +17,9 @@
   "scripts": {
     "coverage": "test-jstransformer coverage",
     "test": "test-jstransformer"
+  },
+  "engines": {
+    "node": ">=0.10.36"
   },
   "repository": {
     "type": "git",

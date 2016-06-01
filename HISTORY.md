@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.3: 2016-06-01
+
+- Update Boilerplate
+
 ## v0.1.2: 2016-06-01
 
 - Update to `twig@0.9.5`

@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Twig.js support for JSTransformers.",
   "dependencies": {
-    "twig": "^0.9.1"
+    "twig": "^0.9.5"
   },
   "keywords": [
     "jstransformer"

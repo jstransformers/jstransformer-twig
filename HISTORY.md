@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.0: 2016-11-02
+
+- Fixes to the path variable
+
 ## v0.2.0: 2016-11-02
 
 - Update to `twig@^0.10.0`

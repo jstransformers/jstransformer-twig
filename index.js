@@ -8,7 +8,6 @@ exports.name = 'twig'
 exports.outputFormat = 'html'
 
 exports.compile = function (str, options) {
-  console.log(options)
   // Construct the Twig options.
   options = options || {}
   options.data = str
@@ -30,7 +29,7 @@ exports.compile = function (str, options) {
         try {
           filter = require(options.filters[name]);
         }
-        catch {
+        catch() {
           // Nothing.
         }
         break;

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.1: 2016-11-16
+
+- Added error handing to the filters
+
 ## v1.1.0: 2016-11-16
 
 - Added `options.filters` to support Twig filters

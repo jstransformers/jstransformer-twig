@@ -23,23 +23,32 @@ exports.compile = function (str, options) {
 
   // Filters
   for (var name in options.filters || {}) {
-    var filter = null;
     switch (typeof options.filters[name]) {
-      case "string":
+      case 'string':
         try {
-          filter = require(options.filters[name]);
+          // Load the filter module.
+          var out = require(options.filters[name]);
+
+          // Check if the module is just a function.
+          if (typeof out === 'function') {
+            Twig.extendFilter(name, out)
+          }
+          // Perhaps it is an associative array of functions?
+          else if (out && (typeof out === 'object')) {
+            for (var outName in out) {
+              if (typeof out[outName] === 'function') {
+                Twig.extendFilter(outName, out[outName])
+              }
+            }
+          }
         }
         catch(err) {
           // Nothing.
         }
         break;
-      case "function":
-      default:
-        filter = options.filters[name];
+      case 'function':
+        Twig.extendFilter(name, options.filters[name]);
         break;
-    }
-    if (filter) {
-      Twig.extendFilter(name, filter);
     }
   }
 

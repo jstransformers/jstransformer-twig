@@ -1,6 +1,6 @@
 {
   "name": "jstransformer-twig",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Twig.js support for JSTransformers.",
   "dependencies": {
     "twig": "^0.10.0"
@@ -12,6 +12,7 @@
     "index.js"
   ],
   "devDependencies": {
+    "phone-formatter": "0.0.2",
     "slugify": "^1.0.2",
     "test-jstransformer": "^1.0.0"
   },

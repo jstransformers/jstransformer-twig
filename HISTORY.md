@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.2: 2016-11-16
+
+- Allow for associative arrays of filter modules
+
 ## v1.1.1: 2016-11-16
 
 - Added error handing to the filters

@@ -1,6 +1,7 @@
 {
   "filters": {
     "sluggifythis": "slugify",
-    "failedfilter": "failedfilter-righthere"
+    "failedfilter": "failedfilter-righthere",
+    "All from phone-formatter": "phone-formatter"
   }
 }

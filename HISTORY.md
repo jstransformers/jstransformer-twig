@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.0: 2016-11-16
+
+- Added `options.filters` to support Twig filters
+
 ## v1.0.0: 2016-11-02
 
 - Fixes to the path variable

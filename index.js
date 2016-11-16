@@ -1,7 +1,8 @@
 'use strict';
 
 var path = require('path')
-var twig = require('twig').twig
+var Twig = require('twig')
+var twigRender = Twig.twig
 
 exports.name = 'twig'
 exports.outputFormat = 'html'
@@ -20,8 +21,23 @@ exports.compile = function (str, options) {
     options.path = path.format(options.path)
   }
 
+  // Filters
+  for (var name in options.filters || {}) {
+    var filter = null;
+    switch (typeof options.filters[name]) {
+      case "string":
+        filter = require(options.filters[name]);
+        break;
+      case "function":
+      default:
+        filter = options.filters[name];
+        break;
+    }
+    Twig.extendFilter(name, filter);
+  }
+
   // Build the template.
-  var template = twig(options)
+  var template = twigRender(options)
 
   // Use .bind() so that the template is "this" when rendering.
   return template.render.bind(template)

@@ -8,6 +8,7 @@ exports.name = 'twig'
 exports.outputFormat = 'html'
 
 exports.compile = function (str, options) {
+  console.log(options)
   // Construct the Twig options.
   options = options || {}
   options.data = str
@@ -26,14 +27,21 @@ exports.compile = function (str, options) {
     var filter = null;
     switch (typeof options.filters[name]) {
       case "string":
-        filter = require(options.filters[name]);
+        try {
+          filter = require(options.filters[name]);
+        }
+        catch {
+          // Nothing.
+        }
         break;
       case "function":
       default:
         filter = options.filters[name];
         break;
     }
-    Twig.extendFilter(name, filter);
+    if (filter) {
+      Twig.extendFilter(name, filter);
+    }
   }
 
   // Build the template.

@@ -29,7 +29,7 @@ exports.compile = function (str, options) {
         try {
           filter = require(options.filters[name]);
         }
-        catch() {
+        catch(err) {
           // Nothing.
         }
         break;

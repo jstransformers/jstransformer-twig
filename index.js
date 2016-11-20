@@ -18,7 +18,14 @@ exports.compile = function (str, options) {
   // Make sure path is always a string, and not an object.
   // TODO: Make sure the `root` is correct?
   if (options.path && options.path !== 'string') {
+    // Prepend the root if it's given.
+    if (options.root) {
+      options.path.dir = path.join(options.root, options.path.dir)
+    }
     options.path = path.format(options.path)
+  }
+  if (options.root && !('base' in options)) {
+    options.base = options.root
   }
 
   // Filters

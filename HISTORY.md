@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.3: 2016-11-27
+
+- Update Twig to `^0.10.2`
+
 ## v1.1.2: 2016-11-16
 
 - Allow for associative arrays of filter modules

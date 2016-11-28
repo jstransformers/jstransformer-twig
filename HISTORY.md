@@ -3,6 +3,7 @@
 ## v1.1.3: 2016-11-27
 
 - Update Twig to `^0.10.2`
+- Fixed `options.path` as an object usage
 
 ## v1.1.2: 2016-11-16
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.0: 2016-12-02
+
+- Adapted `options.root` usage through `options.path`
+
 ## v1.1.3: 2016-11-27
 
 - Update Twig to `^0.10.2`

@@ -1,0 +1,8 @@
+{
+  "path": {
+    "base": "input.twig",
+    "ext": ".twig",
+    "name": "input"
+  },
+  "root": "test/include-root"
+}

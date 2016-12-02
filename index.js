@@ -18,8 +18,9 @@ exports.compile = function (str, options) {
   // Make sure path is always a string, and not an object.
   // TODO: Make sure the `root` is correct?
   if (options.path && typeof options.path !== 'string') {
-    if (options.root) {
-      options.path = path.join(options.root, path.format(options.path))
+    var pathRoot = options.root || options.path.root
+    if (pathRoot) {
+      options.path = path.join(pathRoot, path.format(options.path))
     }
     else {
       options.path = path.format(options.path)

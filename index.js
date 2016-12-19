@@ -28,6 +28,16 @@ exports.compile = function (str, options) {
   }
 
   // Filters
+  // Allow options.filters to be a require() string.
+  if (typeof options.filters == 'string') {
+    try {
+      options.filters = require(options.filters)
+    }
+    catch (err) {
+      // Nothing.
+    }
+  }
+  // Loop through all the given filters.
   for (var name in options.filters || {}) {
     switch (typeof options.filters[name]) {
       case 'string':

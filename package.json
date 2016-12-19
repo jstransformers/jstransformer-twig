@@ -1,9 +1,9 @@
 {
   "name": "jstransformer-twig",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Twig.js support for JSTransformers.",
   "dependencies": {
-    "twig": "^0.10.2"
+    "twig": "^0.10.3"
   },
   "keywords": [
     "jstransformer"

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.0: 2016-12-19
+
+- Allow `options.filters` to be a require string
+
 ## v1.2.0: 2016-12-02
 
 - Adapted `options.root` usage through `options.path`

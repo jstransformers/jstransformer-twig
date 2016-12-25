@@ -1,7 +1,8 @@
-'use strict';
+'use strict'
 
 var path = require('path')
 var Twig = require('twig')
+
 var twigRender = Twig.twig
 
 exports.name = 'twig'
@@ -21,50 +22,51 @@ exports.compile = function (str, options) {
     var pathRoot = options.root || options.path.root
     if (pathRoot) {
       options.path = path.join(pathRoot, path.format(options.path))
-    }
-    else {
+    } else {
       options.path = path.format(options.path)
     }
   }
 
   // Filters
   // Allow options.filters to be a require() string.
-  if (typeof options.filters == 'string') {
+  if (typeof options.filters === 'string') {
     try {
+      // eslint-disable-next-line import/no-dynamic-require
       options.filters = require(options.filters)
-    }
-    catch (err) {
+    } catch (err) {
       // Nothing.
     }
   }
   // Loop through all the given filters.
   for (var name in options.filters || {}) {
-    switch (typeof options.filters[name]) {
-      case 'string':
-        try {
-          // Load the filter module.
-          var out = require(options.filters[name]);
+    if ({}.hasOwnProperty.call(options.filters, name)) {
+      switch (typeof options.filters[name]) {
+        case 'string':
+          try {
+            // Load the filter module.
+            // eslint-disable-next-line import/no-dynamic-require
+            var out = require(options.filters[name])
 
-          // Check if the module is just a function.
-          if (typeof out === 'function') {
-            Twig.extendFilter(name, out)
-          }
-          // Perhaps it is an associative array of functions?
-          else if (out && (typeof out === 'object')) {
-            for (var outName in out) {
-              if (typeof out[outName] === 'function') {
-                Twig.extendFilter(outName, out[outName])
+            // Check if the module is just a function.
+            if (typeof out === 'function') {
+              Twig.extendFilter(name, out)
+            } else if (out && (typeof out === 'object')) {
+              // Perhaps it is an associative array of functions?
+              for (var outName in out) {
+                if (typeof out[outName] === 'function') {
+                  Twig.extendFilter(outName, out[outName])
+                }
               }
             }
+          } catch (err) {
+            // Nothing.
           }
-        }
-        catch(err) {
-          // Nothing.
-        }
-        break;
-      case 'function':
-        Twig.extendFilter(name, options.filters[name]);
-        break;
+          break
+        case 'function':
+        default:
+          Twig.extendFilter(name, options.filters[name])
+          break
+      }
     }
   }
 

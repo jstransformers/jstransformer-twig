@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "sluggifyasfunction": "slugify",
+    "failedfilter": "failedfilter-righthere"
+  }
+}

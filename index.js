@@ -1,9 +1,9 @@
 'use strict'
 
-var path = require('path')
-var Twig = require('twig')
+const path = require('path')
+const Twig = require('twig')
 
-var twigRender = Twig.twig
+const twigRender = Twig.twig
 
 exports.name = 'twig'
 exports.outputFormat = 'html'
@@ -19,7 +19,7 @@ exports.compile = function (str, options) {
   // Make sure path is always a string, and not an object.
   // TODO: Make sure the `root` is correct?
   if (options.path && typeof options.path !== 'string') {
-    var pathRoot = options.root || options.path.root
+    const pathRoot = options.root || options.path.root
     if (pathRoot) {
       options.path = path.join(pathRoot, path.format(options.path))
     } else {
@@ -28,13 +28,13 @@ exports.compile = function (str, options) {
   }
 
   // Extend Filters and Functions
-  var extendable = {
+  const extendable = {
     filters: 'extendFilter',
     functions: 'extendFunction'
   }
   // eslint-disable-next-line guard-for-in
-  for (var extendableName in extendable) {
-    var extendFunctionName = extendable[extendableName]
+  for (const extendableName in extendable) {
+    const extendFunctionName = extendable[extendableName]
     // Allow options.filters to be a require() string.
     if (typeof options[extendableName] === 'string') {
       try {
@@ -43,21 +43,21 @@ exports.compile = function (str, options) {
       } catch (err) {}
     }
     // Loop through all the given filters.
-    for (var name in options[extendableName] || {}) {
+    for (const name in options[extendableName] || {}) {
       if ({}.hasOwnProperty.call(options[extendableName], name)) {
         switch (typeof options[extendableName][name]) {
           case 'string':
             try {
               // Load the filter module.
               // eslint-disable-next-line import/no-dynamic-require
-              var out = require(options[extendableName][name])
+              const out = require(options[extendableName][name])
 
               // Check if the module is just a function.
               if (typeof out === 'function') {
                 Twig[extendFunctionName](name, out)
               } else if (out && (typeof out === 'object')) {
                 // Perhaps it is an associative array of functions?
-                for (var outName in out) {
+                for (const outName in out) {
                   if (typeof out[outName] === 'function') {
                     Twig[extendFunctionName](outName, out[outName])
                   }
@@ -78,7 +78,7 @@ exports.compile = function (str, options) {
   let output = ''
   try {
     // Build the template renderer.
-    var template = twigRender(options)
+    const template = twigRender(options)
 
     // Use .bind() so that the template is "this" when rendering.
     output = template.render.bind(template)

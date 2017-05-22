@@ -40,9 +40,7 @@ exports.compile = function (str, options) {
       try {
         // eslint-disable-next-line import/no-dynamic-require
         options[extendableName] = require(options[extendableName])
-      } catch (err) {
-        delete options[extendableName]
-      }
+      } catch (err) {}
     }
     // Loop through all the given filters.
     for (var name in options[extendableName] || {}) {

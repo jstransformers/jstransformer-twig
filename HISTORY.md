@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.0: 2017-xx-xx
+
+-- Added `functions` support
+
 ## v1.3.0: 2016-12-19
 
 - Allow `options.filters` to be a require string

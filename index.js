@@ -41,7 +41,7 @@ exports.compile = function (str, options) {
         // eslint-disable-next-line import/no-dynamic-require
         options[extendableName] = require(options[extendableName])
       } catch (err) {
-        // Nothing.
+        delete options[extendableName]
       }
     }
     // Loop through all the given filters.
@@ -65,9 +65,7 @@ exports.compile = function (str, options) {
                   }
                 }
               }
-            } catch (err) {
-              // Nothing.
-            }
+            } catch (err) {}
             break
           case 'function':
           default:
@@ -79,13 +77,17 @@ exports.compile = function (str, options) {
   }
 
   // Build the template.
-  try{
-  var template = twigRender(options)
-}catch(e) {
-  console.log(options)
-  console.error(e)
-}
+  let output = ''
+  try {
+    // Build the template renderer.
+    var template = twigRender(options)
 
-  // Use .bind() so that the template is "this" when rendering.
-  return template.render.bind(template)
+    // Use .bind() so that the template is "this" when rendering.
+    output = template.render.bind(template)
+  } catch (err) {
+    console.log(options)
+    console.error(err)
+  }
+
+  return output
 }

@@ -1,6 +1,6 @@
 {
   "name": "jstransformer-twig",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Twig.js support for JSTransformers.",
   "dependencies": {
     "twig": "^1.10.4"

@@ -1,7 +1,5 @@
 # jstransformer-twig
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/jstransformers/jstransformer-twig.svg)](https://greenkeeper.io/)
-
 [Twig.js](https://github.com/justjohn/twig.js) support for [JSTransformers](http://github.com/jstransformers).
 
 [![Build Status](https://img.shields.io/travis/jstransformers/jstransformer-twig/master.svg)](https://travis-ci.org/jstransformers/jstransformer-twig)

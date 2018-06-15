@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.5.0-alpha.2: 2018-06-15
+
+- Update to `twig@~1.12.0`
+
 ## v1.5.0-alpha.1: 2018-05-30
 
 - Includes Twig `extend` fix ([#559](https://github.com/twigjs/twig.js/pull/559))

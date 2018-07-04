@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.5.0-alpha.4: 2018-07-04
+
+- Update to `twig@~1.12.0#662d520e93925ba9a0f92c8757ea31351a824490`
+
 ## v1.5.0-alpha.3: 2018-06-20
 
 - Fix Twig's `source()` function to allow absolute and relative paths

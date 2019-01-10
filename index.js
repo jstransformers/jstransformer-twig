@@ -40,7 +40,9 @@ exports.compile = function (str, options) {
       try {
         // eslint-disable-next-line import/no-dynamic-require
         options[extendableName] = require(options[extendableName])
-      } catch (err) {}
+      } catch (error) {
+        // Ignore
+      }
     }
     // Loop through all the given filters.
     for (const name in options[extendableName] || {}) {
@@ -63,7 +65,9 @@ exports.compile = function (str, options) {
                   }
                 }
               }
-            } catch (err) {}
+            } catch (error) {
+              // Ignore
+            }
             break
           case 'function':
           default:
@@ -82,9 +86,9 @@ exports.compile = function (str, options) {
 
     // Use .bind() so that the template is "this" when rendering.
     output = template.render.bind(template)
-  } catch (err) {
+  } catch (error) {
     console.log(options)
-    console.error(err)
+    console.error(error)
   }
 
   return output

@@ -38,12 +38,12 @@ exports.compile = function (str, options) {
     // Allow options.filters to be a require() string.
     if (typeof options[extendableName] === 'string') {
       try {
-        // eslint-disable-next-line import/no-dynamic-require
         options[extendableName] = require(options[extendableName])
       } catch (error) {
         // Ignore
       }
     }
+
     // Loop through all the given filters.
     for (const name in options[extendableName] || {}) {
       if ({}.hasOwnProperty.call(options[extendableName], name)) {
@@ -51,7 +51,6 @@ exports.compile = function (str, options) {
           case 'string':
             try {
               // Load the filter module.
-              // eslint-disable-next-line import/no-dynamic-require
               const out = require(options[extendableName][name])
 
               // Check if the module is just a function.
@@ -68,6 +67,7 @@ exports.compile = function (str, options) {
             } catch (error) {
               // Ignore
             }
+
             break
           case 'function':
           default:

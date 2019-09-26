@@ -40,7 +40,7 @@ exports.compile = function (str, options) {
       try {
         options[extendableName] = require(options[extendableName])
       } catch (error) {
-        // Ignore
+        console.error(error)
       }
     }
 
@@ -65,7 +65,7 @@ exports.compile = function (str, options) {
                 }
               }
             } catch (error) {
-              // Ignore
+              console.error(error)
             }
 
             break

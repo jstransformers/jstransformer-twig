@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.6.1: 2020-03-04
+
+- Update to `twig@~1.15.0`
+
 ## v1.6.0: 2019-01-10
 
 - Update to `twig@~1.13.0`

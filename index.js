@@ -8,10 +8,10 @@ const twigRender = Twig.twig
 exports.name = 'twig'
 exports.outputFormat = 'html'
 
-exports.compile = function (str, options) {
+exports.compile = function (input, options) {
   // Construct the Twig options.
   options = options || {}
-  options.data = str
+  options.data = input
   if ('filename' in options && !('path' in options)) {
     options.path = options.filename
   }

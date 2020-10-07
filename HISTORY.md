@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.6.3: 2020-10-07
+
+- Added name validation when loading extensions
+
 ## v1.6.2: 2020-03-04
 
 - Update to `twig@~1.15.0`

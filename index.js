@@ -2,6 +2,7 @@
 
 const path = require('path')
 const Twig = require('twig')
+const validPackageName = require('validate-npm-package-name')
 
 const twigRender = Twig.twig
 
@@ -49,23 +50,26 @@ exports.compile = function (input, options) {
       if ({}.hasOwnProperty.call(options[extendableName], name)) {
         switch (typeof options[extendableName][name]) {
           case 'string':
-            try {
-              // Load the filter module.
-              const out = require(options[extendableName][name])
+            // Validate that we're loading an actual package.
+            if (validPackageName(options[extendableName][name]).validForNewPackages) {
+              try {
+                // Load the filter module.
+                const out = require(options[extendableName][name])
 
-              // Check if the module is just a function.
-              if (typeof out === 'function') {
-                Twig[extendFunctionName](name, out)
-              } else if (out && (typeof out === 'object')) {
-                // Perhaps it is an associative array of functions?
-                for (const outName in out) {
-                  if (typeof out[outName] === 'function') {
-                    Twig[extendFunctionName](outName, out[outName])
+                // Check if the module is just a function.
+                if (typeof out === 'function') {
+                  Twig[extendFunctionName](name, out)
+                } else if (out && (typeof out === 'object')) {
+                  // Perhaps it is an associative array of functions?
+                  for (const outName in out) {
+                    if (typeof out[outName] === 'function') {
+                      Twig[extendFunctionName](outName, out[outName])
+                    }
                   }
                 }
+              } catch (error) {
+                console.error(error)
               }
-            } catch (error) {
-              console.error(error)
             }
 
             break

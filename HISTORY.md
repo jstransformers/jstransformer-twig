@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.6.3: 2020-10-07
+## v1.7.0: 2020-10-07
 
 - Added name validation when loading extensions
 

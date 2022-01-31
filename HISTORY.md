@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.8.0: 2021-01-31
+
+- Updated twig 1.15.2 => 1.15.4
+- Conform code to new xo linting rules
+- Dropped support for Node < 8.0.0
+
 ## v1.7.0: 2020-10-07
 
 - Added name validation when loading extensions

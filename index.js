@@ -6,10 +6,38 @@ const validPackageName = require('validate-npm-package-name')
 
 const twigRender = Twig.twig
 
-exports.name = 'twig'
-exports.outputFormat = 'html'
+const loadModuleFilter = (name, filterModule, extendFunctionName) => {
+  // Validate that we're loading an actual package.
+  if (!validPackageName(filterModule).validForNewPackages) {
+    return
+  }
 
-exports.compile = function (input, options) {
+  try {
+    // Load the filter module.
+    const out = require(filterModule)
+
+    // Check if the module is just a function.
+    if (typeof out === 'function') {
+      Twig[extendFunctionName](name, out)
+    } else if (out && (typeof out === 'object')) {
+      // Perhaps it is an associative array of functions?
+      for (const outName in out) {
+        if (typeof out[outName] === 'function') {
+          Twig[extendFunctionName](outName, out[outName])
+        }
+      }
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const transformer = {
+  name: 'twig',
+  outputFormat: 'html',
+}
+
+transformer.compile = function (input, options) {
   // Construct the Twig options.
   options = options || {}
   options.data = input
@@ -21,20 +49,16 @@ exports.compile = function (input, options) {
   // TODO: Make sure the `root` is correct?
   if (options.path && typeof options.path !== 'string') {
     const pathRoot = options.root || options.path.root
-    if (pathRoot) {
-      options.path = path.join(pathRoot, path.format(options.path))
-    } else {
-      options.path = path.format(options.path)
-    }
+    options.path = pathRoot ? path.join(pathRoot, path.format(options.path)) : path.format(options.path)
   }
 
   // Extend Filters and Functions
   const extendable = {
     filters: 'extendFilter',
-    functions: 'extendFunction'
+    functions: 'extendFunction',
   }
-  // eslint-disable-next-line guard-for-in
-  for (const extendableName in extendable) {
+
+  for (const extendableName of Object.keys(extendable)) {
     const extendFunctionName = extendable[extendableName]
     // Allow options.filters to be a require() string.
     if (typeof options[extendableName] === 'string') {
@@ -46,38 +70,12 @@ exports.compile = function (input, options) {
     }
 
     // Loop through all the given filters.
-    for (const name in options[extendableName] || {}) {
-      if ({}.hasOwnProperty.call(options[extendableName], name)) {
-        switch (typeof options[extendableName][name]) {
-          case 'string':
-            // Validate that we're loading an actual package.
-            if (validPackageName(options[extendableName][name]).validForNewPackages) {
-              try {
-                // Load the filter module.
-                const out = require(options[extendableName][name])
-
-                // Check if the module is just a function.
-                if (typeof out === 'function') {
-                  Twig[extendFunctionName](name, out)
-                } else if (out && (typeof out === 'object')) {
-                  // Perhaps it is an associative array of functions?
-                  for (const outName in out) {
-                    if (typeof out[outName] === 'function') {
-                      Twig[extendFunctionName](outName, out[outName])
-                    }
-                  }
-                }
-              } catch (error) {
-                console.error(error)
-              }
-            }
-
-            break
-          case 'function':
-          default:
-            Twig[extendFunctionName](name, options[extendableName][name])
-            break
-        }
+    for (const name of Object.keys(options[extendableName] || {})) {
+      const filter = options[extendableName][name]
+      if (typeof filter === 'string') {
+        loadModuleFilter(name, options[extendableName][name], extendFunctionName)
+      } else if (typeof filter === 'function') {
+        Twig[extendFunctionName](name, options[extendableName][name])
       }
     }
   }
@@ -97,3 +95,5 @@ exports.compile = function (input, options) {
 
   return output
 }
+
+module.exports = transformer

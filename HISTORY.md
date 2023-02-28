@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.16.0: 2023-02-28
+
+- Updated to twig 1.16.0
+- Remove xo coding style constraints
+- Dropped support for Node < 8.0.0
+
 ## v1.7.0: 2020-10-07
 
 - Added name validation when loading extensions

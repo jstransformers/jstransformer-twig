@@ -1,9 +1,9 @@
 # Changelog
 
-## v1.8.0: 2021-01-31
+## v1.16.0: 2023-02-28
 
-- Updated twig 1.15.2 => 1.15.4
-- Conform code to new xo linting rules
+- Updated to twig 1.16.0
+- Remove xo coding style constraints
 - Dropped support for Node < 8.0.0
 
 ## v1.7.0: 2020-10-07
